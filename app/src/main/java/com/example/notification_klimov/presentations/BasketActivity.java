@@ -1,4 +1,4 @@
-package com.example.notification_klimov;
+package com.example.notification_klimov.presentations;
 
 import android.os.Bundle;
 
@@ -8,7 +8,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.notification_klimov.R;
+
 public class BasketActivity extends AppCompatActivity {
+    public static String TOKEN = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

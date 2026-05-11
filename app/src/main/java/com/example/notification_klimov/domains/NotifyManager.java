@@ -10,7 +10,7 @@ import android.content.pm.PackageManager;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import com.example.notification_klimov.MainActivity;
+import com.example.notification_klimov.presentations.MainActivity;
 import com.example.notification_klimov.R;
 
 public class NotifyManager {

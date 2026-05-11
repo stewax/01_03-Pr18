@@ -16,17 +16,22 @@
         android:theme="@style/Theme.Notification_Klimov"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".BasketActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".presentations.BasketActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service
+            android:name=".infrastructure.OrderService"
+            android:enabled="true"
+            android:exported="false"/>
+        <activity
+            android:name=".presentations.MainActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>
