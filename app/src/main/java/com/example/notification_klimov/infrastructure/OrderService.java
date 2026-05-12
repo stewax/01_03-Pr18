@@ -15,6 +15,7 @@ import com.example.notification_klimov.presentations.BasketActivity;
 import com.example.notification_klimov.domains.NotifyManager;
 import com.google.gson.GsonBuilder;
 
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -22,9 +23,18 @@ public class OrderService extends Service {
     public Integer id;
     String TAG = "ORDER SERVICE";
     Integer Interval = 30 * 1000;
+    Integer PromoInterval = 60 * 60 * 1000;
     Handler handler = new Handler();
     ExecutorService executorService = Executors.newSingleThreadExecutor();
     NotifyManager notifyManager;
+    Random random = new Random();
+
+    String[] promos = {
+            "Скидка 20% на всё!",
+            "Бесплатная доставка!",
+            "Закажи сегодня - получи кешбек 10%",
+            "Товары недели со скидкой!"
+    };
 
     Runnable CheckStatusRunnable = new Runnable() {
         @Override
@@ -62,6 +72,15 @@ public class OrderService extends Service {
         }
     };
 
+    Runnable PromoRunnable = new Runnable() {
+        @Override
+        public void run() {
+            String randomPromo = promos[random.nextInt(promos.length)];
+            notifyManager.SendNotify(randomPromo);
+            handler.postDelayed(PromoRunnable, PromoInterval);
+        }
+    };
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -72,11 +91,15 @@ public class OrderService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         handler.removeCallbacks(CheckStatusRunnable);
+        handler.removeCallbacks(PromoRunnable);
+
         handler.post(CheckStatusRunnable);
 
         if (intent != null && intent.hasExtra("id")) {
             id = intent.getIntExtra("id", -1);
         }
+
+        handler.postDelayed(PromoRunnable, 10000);
 
         return START_STICKY;
     }
