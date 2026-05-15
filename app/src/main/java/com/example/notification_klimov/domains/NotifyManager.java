@@ -22,6 +22,10 @@ public class NotifyManager {
     }
 
     public void SendNotify(String message) {
+        if (context == null) {
+            return;
+        }
+
         if (PermissionManager.CheckPermission(context) != PackageManager.PERMISSION_GRANTED) {
             return;
         }

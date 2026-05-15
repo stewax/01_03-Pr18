@@ -34,7 +34,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 
 public class BasketActivity extends AppCompatActivity {
-    public static String TOKEN = "";
+    public static String TOKEN = "90ea2be3-da90-4542-86e3-c870fbe3750f";
     ArrayList<ProductBasket> ProductsBasket = new ArrayList<>();
     LinearLayout llItems;
     TextView tvAllSum;
@@ -129,7 +129,7 @@ public class BasketActivity extends AppCompatActivity {
     }
 
     public void onBasketUpdate(ProductBasket productBasket) {
-        Basket Data = new Basket(productBasket.count, productBasket.product.id);
+        Basket Data = new Basket(productBasket.product.id, productBasket.count);
         BasketUpdate RequestBasketUpdate = new BasketUpdate(
                 TOKEN,
                 Data,
@@ -154,8 +154,10 @@ public class BasketActivity extends AppCompatActivity {
         Integer AllSum = 0;
 
         for (int i = 0; i < ProductsBasket.size(); i++) {
-            ProductBasket ProductBasket = ProductsBasket.get(i);
-            View itemOrder = LayoutInflater.from(this).inflate(R.layout.item_basket, llItems, false);
+            final ProductBasket productBasket = ProductsBasket.get(i);
+            View itemOrder = LayoutInflater.from(this).inflate(R.layout.item_basket, null);
+
+            llItems.addView(itemOrder);
 
             TextView tvName = itemOrder.findViewById(R.id.tvName);
             TextView tvPrice = itemOrder.findViewById(R.id.tvPrice);
@@ -164,27 +166,28 @@ public class BasketActivity extends AppCompatActivity {
             View btnPlus = itemOrder.findViewById(R.id.btnPlus);
             View btnItemClear = itemOrder.findViewById(R.id.btnItemClear);
 
-            tvName.setText(ProductBasket.product.name);
-            tvPrice.setText(ProductBasket.product.price + " ₽");
-            tvCount.setText(ProductBasket.count + " штук");
+            tvName.setText(productBasket.product.name);
+            tvPrice.setText(productBasket.product.price + " ₽");
+            tvCount.setText(productBasket.count + " штук");
 
             btnMinus.setOnClickListener(v -> {
-                ProductBasket.count--;
-                onBasketUpdate(ProductBasket);
+                productBasket.count--;
+                onBasketUpdate(productBasket);
             });
 
             btnPlus.setOnClickListener(v -> {
-                ProductBasket.count++;
-                onBasketUpdate(ProductBasket);
+                productBasket.count++;
+                onBasketUpdate(productBasket);
             });
 
+            btnItemClear.setClickable(true);
+            btnItemClear.setFocusable(true);
             btnItemClear.setOnClickListener(v -> {
-                ProductBasket.count = 0;
-                onBasketUpdate(ProductBasket);
+                productBasket.count = 0;
+                onBasketUpdate(productBasket);
             });
 
-            AllSum += ProductBasket.product.price * ProductBasket.count;
-            llItems.addView(itemOrder);
+            AllSum += productBasket.product.price * productBasket.count;
         }
         tvAllSum.setText(AllSum + " ₽");
     }

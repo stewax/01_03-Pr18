@@ -15,12 +15,14 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/bth_back"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="24dp"
@@ -30,7 +32,7 @@
         app:layout_constraintTop_toBottomOf="@id/linearLayout">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/roboto"
@@ -41,20 +43,23 @@
 
         <ImageView
             android:id="@+id/btnBasketDelete"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_margin="5dp"
+            android:clickable="true"
+            android:focusable="true"
             android:src="@drawable/ic_trash"/>
 
     </LinearLayout>
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="32dp"
         android:layout_marginRight="20dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@+id/llAllSum"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,15 +77,17 @@
 
     <LinearLayout
         android:id="@+id/llAllSum"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@+id/btnOrderCreate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/roboto"
@@ -91,7 +98,7 @@
 
         <TextView
             android:id="@+id/tvAllSum"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/roboto"
@@ -105,7 +112,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnOrderCreate"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="56dp"
         android:background="@drawable/bth_primary"
         android:fontFamily="@font/roboto"
@@ -117,6 +124,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="32dp"
+        android:elevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
