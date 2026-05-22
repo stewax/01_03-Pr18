@@ -1,4 +1,4 @@
-package com.example.notification_klimov;
+package com.example.notification_kazakov;
 
 import org.junit.Test;
 

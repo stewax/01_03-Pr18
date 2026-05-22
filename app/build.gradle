@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.notification_klimov'
+    namespace 'com.example.notification_kazakov'
     compileSdk 36
 
     defaultConfig {
-        applicationId "com.example.notification_klimov"
+        applicationId "com.example.notification_kazakov"
         minSdk 29
         targetSdk 36
         versionCode 1

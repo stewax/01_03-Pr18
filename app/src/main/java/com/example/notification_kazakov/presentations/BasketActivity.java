@@ -1,4 +1,4 @@
-package com.example.notification_klimov.presentations;
+package com.example.notification_kazakov.presentations;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,9 +12,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.network.datas.basket.BasketDelete;
 import com.example.network.datas.basket.BasketGet;
@@ -24,17 +22,16 @@ import com.example.network.domains.callbacks.MyResponseCallback;
 import com.example.network.domains.models.Basket;
 import com.example.network.domains.models.Order;
 import com.example.network.domains.models.ProductBasket;
-import com.example.notification_klimov.R;
-import com.example.notification_klimov.domains.PermissionManager;
-import com.example.notification_klimov.infrastructure.OrderService;
-import com.google.gson.Gson;
+import com.example.notification_kazakov.R;
+import com.example.notification_kazakov.domains.PermissionManager;
+import com.example.notification_kazakov.infrastructure.OrderService;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
 public class BasketActivity extends AppCompatActivity {
-    public static String TOKEN = "90ea2be3-da90-4542-86e3-c870fbe3750f";
+    public static String TOKEN = "1178564f-3d32-4bca-8d04-c1e340edcd0e";
     ArrayList<ProductBasket> ProductsBasket = new ArrayList<>();
     LinearLayout llItems;
     TextView tvAllSum;
@@ -88,9 +85,12 @@ public class BasketActivity extends AppCompatActivity {
                             Toast.makeText(context,
                                     "Заказ успешно оформлен, при изменении статуса, вам придёт уведомление",
                                     Toast.LENGTH_SHORT).show();
-                            Intent OrderService = new Intent(context, OrderService.class);
-                            OrderService.putExtra("id", order.id);
-                            startService(OrderService);
+
+                            Intent orderServiceIntent = new Intent(context, OrderService.class);
+                            orderServiceIntent.putExtra(OrderService.EXTRA_ORDER_ID, order.id);
+                            orderServiceIntent.putExtra(OrderService.EXTRA_AUTH_TOKEN, TOKEN);
+
+                            ContextCompat.startForegroundService(context, orderServiceIntent);
                         }
 
                         @Override

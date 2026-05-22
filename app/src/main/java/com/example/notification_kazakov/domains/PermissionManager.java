@@ -1,4 +1,4 @@
-package com.example.notification_klimov.domains;
+package com.example.notification_kazakov.domains;
 
 import android.Manifest;
 import android.app.Activity;

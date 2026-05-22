@@ -22,6 +22,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "notification_Klimov"
+rootProject.name = "notification_kazakov"
 include ':app'
 include ':network'
