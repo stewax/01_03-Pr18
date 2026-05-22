@@ -37,7 +37,7 @@ public class OrderService extends Service {
         public void run() {
             if (orderId == null || authToken == null) {
                 Log.e(TAG, "orderId or token is null. Stopping.");
-                stopSelf();
+                stopServiceSafely();
                 return;
             }
 
@@ -46,18 +46,35 @@ public class OrderService extends Service {
                 public void onCompile(String result) {
                     try {
                         Order orderData = new GsonBuilder().create().fromJson(result, Order.class);
-                        if (orderData != null && orderData.status == 1) {
+
+                        if (orderData == null) {
+                            Log.e(TAG, "orderData is null after parse");
+                            handler.postDelayed(checkStatusRunnable, intervalMs);
+                            return;
+                        }
+
+                        Log.d(TAG, "Order status: " + orderData.status);
+
+                        // Безопасное сравнение Integer-объекта
+                        if (orderData.status != null && orderData.status == 1) {
                             int allSum = 0;
-                            for (int i = 0; i < orderData.products.size(); i++) {
-                                allSum += orderData.products.get(i).product.price * orderData.products.get(i).count;
+                            if (orderData.products != null) {
+                                for (int i = 0; i < orderData.products.size(); i++) {
+                                    allSum += orderData.products.get(i).product.price
+                                            * orderData.products.get(i).count;
+                                }
                             }
 
-                            notifyManager.SendNotify(
-                                    "Ваш заказ на сумму: " + allSum +
-                                            " руб., состоящий из " + orderData.products.size() +
-                                            " товаров, успешно доставлен."
-                            );
-                            stopSelf();
+                            String message = "Ваш заказ на сумму: " + allSum +
+                                    " руб., состоящий из " +
+                                    (orderData.products != null ? orderData.products.size() : 0) +
+                                    " товаров, успешно доставлен.";
+
+                            Log.d(TAG, "Sending notification: " + message);
+                            notifyManager.SendNotify(message);
+
+                            // Сначала снимаем foreground, потом останавливаем сервис
+                            stopServiceSafely();
                         } else {
                             handler.postDelayed(checkStatusRunnable, intervalMs);
                         }
@@ -77,6 +94,15 @@ public class OrderService extends Service {
         }
     };
 
+    private void stopServiceSafely() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            stopForeground(STOP_FOREGROUND_REMOVE);
+        } else {
+            stopForeground(true);
+        }
+        stopSelf();
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -88,7 +114,7 @@ public class OrderService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent == null) {
             Log.e(TAG, "Intent is null. Stopping service.");
-            stopSelf();
+            stopServiceSafely();
             return START_NOT_STICKY;
         }
 
@@ -97,15 +123,18 @@ public class OrderService extends Service {
 
         if (orderId == -1 || authToken == null || authToken.isEmpty()) {
             Log.e(TAG, "Missing order ID or token. Stopping service.");
-            stopSelf();
+            stopServiceSafely();
             return START_NOT_STICKY;
         }
+
+        Log.d(TAG, "Tracking order id=" + orderId);
 
         createNotificationChannel();
         Notification notification = new NotificationCompat.Builder(this, "ORDER_TRACKING_CHANNEL")
                 .setContentTitle("Отслеживание заказа")
                 .setContentText("Ожидаем подтверждение доставки...")
                 .setSmallIcon(R.drawable.icon)
+                .setOngoing(true)
                 .build();
 
         startForeground(NOTIFICATION_ID, notification);
@@ -124,7 +153,9 @@ public class OrderService extends Service {
                     NotificationManager.IMPORTANCE_LOW
             );
             NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
+            if (manager != null) {
+                manager.createNotificationChannel(channel);
+            }
         }
     }
 
