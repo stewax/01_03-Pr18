@@ -1,4 +1,4 @@
-package com.example.notification_kazakov.infrastructure;
+package com.example.notification_osennikov.infrastructure;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -16,8 +16,8 @@ import androidx.core.app.NotificationCompat;
 import com.example.network.datas.order.OrderGet;
 import com.example.network.domains.callbacks.MyResponseCallback;
 import com.example.network.domains.models.Order;
-import com.example.notification_kazakov.R;
-import com.example.notification_kazakov.domains.NotifyManager;
+import com.example.notification_osennikov.R;
+import com.example.notification_osennikov.domains.NotifyManager;
 import com.google.gson.GsonBuilder;
 
 public class OrderService extends Service {

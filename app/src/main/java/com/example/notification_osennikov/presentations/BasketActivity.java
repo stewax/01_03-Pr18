@@ -1,4 +1,4 @@
-package com.example.notification_kazakov.presentations;
+package com.example.notification_osennikov.presentations;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,9 +22,9 @@ import com.example.network.domains.callbacks.MyResponseCallback;
 import com.example.network.domains.models.Basket;
 import com.example.network.domains.models.Order;
 import com.example.network.domains.models.ProductBasket;
-import com.example.notification_kazakov.R;
-import com.example.notification_kazakov.domains.PermissionManager;
-import com.example.notification_kazakov.infrastructure.OrderService;
+import com.example.notification_osennikov.R;
+import com.example.notification_osennikov.domains.PermissionManager;
+import com.example.notification_osennikov.infrastructure.OrderService;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 

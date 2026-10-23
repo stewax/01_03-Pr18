@@ -1,4 +1,4 @@
-package com.example.notification_kazakov.presentations;
+package com.example.notification_osennikov.presentations;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.notification_kazakov.R;
+import com.example.notification_osennikov.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        Intent PromoService = new Intent(this, com.example.notification_kazakov.infrastructure.PromoService.class);
+        Intent PromoService = new Intent(this, com.example.notification_osennikov.infrastructure.PromoService.class);
         startService(PromoService);
     }
 }

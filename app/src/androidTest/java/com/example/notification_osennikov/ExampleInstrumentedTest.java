@@ -1,4 +1,4 @@
-package com.example.notification_kazakov;
+package com.example.notification_osennikov;
 
 import android.content.Context;
 

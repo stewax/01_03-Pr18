@@ -1,4 +1,4 @@
-package com.example.notification_kazakov.infrastructure;
+package com.example.notification_osennikov.infrastructure;
 
 import android.app.Service;
 import android.content.Intent;
@@ -7,7 +7,7 @@ import android.os.IBinder;
 
 import androidx.annotation.Nullable;
 
-import com.example.notification_kazakov.domains.NotifyManager;
+import com.example.notification_osennikov.domains.NotifyManager;
 
 import java.util.Random;
 

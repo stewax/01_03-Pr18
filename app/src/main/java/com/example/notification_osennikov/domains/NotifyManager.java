@@ -1,4 +1,4 @@
-package com.example.notification_kazakov.domains;
+package com.example.notification_osennikov.domains;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -10,8 +10,8 @@ import android.content.pm.PackageManager;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import com.example.notification_kazakov.presentations.MainActivity;
-import com.example.notification_kazakov.R;
+import com.example.notification_osennikov.presentations.MainActivity;
+import com.example.notification_osennikov.R;
 
 public class NotifyManager {
     String CHANNEL_ID = "Matule_Channel";
