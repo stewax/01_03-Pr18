@@ -31,7 +31,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 
 public class BasketActivity extends AppCompatActivity {
-    public static String TOKEN = "1178564f-3d32-4bca-8d04-c1e340edcd0e";
+    public static String TOKEN = "a282c949-ad26-4d33-b32a-914aa17790c7";
     ArrayList<ProductBasket> ProductsBasket = new ArrayList<>();
     LinearLayout llItems;
     TextView tvAllSum;
